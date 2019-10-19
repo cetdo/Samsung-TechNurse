@@ -1,0 +1,46 @@
+<html>
+<title>Tech Nurse | Login</title>
+
+
+<head></head>
+<p>Tech Nurse</p>
+
+<body>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    Email: <input id="email"><br>
+    Senha: <input id="senha" type="password"><br>
+
+    <button id="confima" onclick="entrar()">Entrar</button>
+    <script>
+
+        function entrar() {
+            em = document.getElementById("email").value
+            sen = document.getElementById("senha").value
+
+            axios({
+                method: 'post',
+                url: 'http://localhost:3333/api/auth/login',
+                data: {
+                    "email": em,
+                    "password": sen
+                }
+            })
+                .then(data => {
+                    alert('Login efetuado com sucesso!')
+                    console.log(data)
+                })
+                .catch(erro => {
+                    alert('Erro ao efetuar login!')
+                    console.log(erro)
+                })
+
+            
+        }
+
+
+
+    </script>
+</body>
+
+</html>

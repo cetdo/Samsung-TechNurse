@@ -1,0 +1,236 @@
+<html>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<div id="container">
+
+    <p href="https://imgur.com/3XVWGla"><img src="https://i.imgur.com/3XVWGla.png" title="source: imgur.com"
+            style="width:110px;height:30px;" /></p>
+    <p>Login</p>
+    <label for="Email">Email:</label>
+    <input type="Email" id="Email" name="Email">
+    <label for="password">Senha:</label>
+    <input type="password" required id="password" name="password">
+
+    <div id="lower">
+
+        <head>
+            <style type="text/css">
+                html,
+                body {
+                    width: 100%;
+                    height: 100%;
+                    font-family: 'Open Sans', sans-serif;
+                    color: #444;
+                    -webkit-font-smoothing: antialiased;
+                    background: #f0f0f0;
+                }
+
+                form {
+                    margin: 0 auto;
+                    margin-top: 20px;
+                }
+
+                #container {
+                    position: fixed;
+                    width: 340px;
+                    height: 450px;
+                    top: 25%;
+                    left: 50%;
+                    margin-top: -140px;
+                    margin-left: -170px;
+                    background: #fff;
+                    border-radius: 3px;
+                    border: 1px solid #ccc;
+                    box-shadow: 5px 10px 8px #888888;
+                }
+
+
+                label {
+                    color: #555;
+                    display: inline-block;
+                    margin-left: 18px;
+                    padding-top: 10px;
+                    font-size: 14px;
+                }
+
+                styledimg {
+                    background-image: url(path);
+                    background-repeat: no-repeat;
+                    width: 10px;
+                    height: 20px;
+                }
+
+                p a {
+                    font-size: 11px;
+                    color: grey;
+                    float: right;
+                    margin-top: -13px;
+                    margin-right: 20px;
+                }
+
+                p a:hover {
+                    color: #555;
+                }
+
+
+
+                input {
+                    font-family: 'Open Sans', sans-serif;
+                    font-size: 12px;
+                    outline: none;
+                }
+
+
+                input[type=email],
+                input[type=password] {
+                    color: grey;
+                    padding-left: 10px;
+                    margin: 5px;
+                    margin-top: 12px;
+                    margin-left: 18px;
+                    width: 290px;
+                    height: 35px;
+                    border: 1px solid #6CF3C1;
+                    border-radius: 1px;
+                    /box-shadow: inset 0 1px 1px rgba(190, 190, 190, .4), 0 0 0 1px #6CF3C1;/
+                }
+
+                #lower {
+                    background: white;
+                    width: 100%;
+                    height: 100px;
+                    margin-top: 5px;
+                    margin-bottom: 5px;
+                }
+
+
+                .button {
+                    float: right;
+                    position: relative;
+                    margin-right: 20px;
+                    s margin-top: 50px;
+                    width: 300px;
+                    height: 30px;
+                    background-color: #6CF3C1;
+                    border: 1px solid #6CF3C1;
+                    box-shadow: 0 1px 2px rgba(0, 0, 0, .3), inset 0 1px 0 rgba(255, 255, 255, .5);
+                    cursor: pointer;
+                    -webkit-transition-duration: 0.4s;
+                    transition-duration: 0.4s;
+                    cursor: pointer;
+
+                }
+
+                .button1 {
+                    background-color: 6CF3C1;
+                    color: black;
+                    border: 2px solid #6CF3C1;
+                }
+
+                .button1:hover {
+                    background-color: white;
+                    color: black;
+                }
+
+                ul {
+                    list-style: none;
+                    padding: 0;
+                    margin: 0;
+                    font-size: 15px;
+                    color: #555;
+                }
+
+                li {
+                    padding-left: 16px;
+                }
+
+                li:before {
+                    content: "•";
+                    padding-right: 8px;
+                    color: #6CF3C1;
+                }
+
+                p {
+                    text-align: center;
+                    color: #555
+                }
+
+                styledimg {
+                    background-image: url(technurse-api-example-master\resources\views\imgs\logo.png);
+                    background-repeat: no-repeat;
+                    width: 10px;
+                    height: 20px;
+                }
+            </style>
+
+        </head>
+
+        </ul>
+        <p></p>
+
+        <p></p>
+        <p></p>
+        <button class="button button1" onclick="validatePass()">Cadastrar</button>
+
+    </div>
+    <script>
+        function validatePass() {
+            pass = document.getElementById('password').value
+            confirmPassword = document.getElementById('password2').value
+            lowerPassword = pass.toLowerCase()
+            flag = true;
+            if (pass != confirmPassword) {
+                flag = false;
+            }
+            if (pass == lowerPassword) {
+                flag = false;
+            }
+            if (pass.length < 6) {
+                flag = false;
+            }
+            is_number = false;
+            for (var i = 0; i <= 9; i++) {
+                if (pass.search(i.toString()) != -1) {
+                    is_number = true;
+                    break;
+                }
+            }
+            if (!is_number) {
+                flag = false;
+            }
+            if (!flag) {
+                alert('Wrong Password')
+            }
+            return flag;
+        }
+
+        function validateEmail() {
+            email = document.getElementById('Email').value
+            if (email.search('@') == -1 || email.search('.') == -1) {
+                alert("Wrong email")
+                return false
+            } else {
+                return true
+            }
+        }
+
+        function register() {
+            if (validatePass() && validateEmail()) {
+                email = document.getElementById('Email').value
+                password = document.getElementById('senha').value
+                axios.post("localhost:3333/api/auth/register", {
+                    "email": email,
+                    "password": password
+                })
+                    .then((response) => {
+                        console.log(response)
+                    })
+                    .catch((erro) => {
+                        alert('Erro no servidor')
+                    })
+            }
+        }
+    </script>
+
+</div>
+
+</html>

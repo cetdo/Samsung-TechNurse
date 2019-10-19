@@ -1,0 +1,65 @@
+<html>
+<title>Tech Nurse | Novo Usuário</title>
+
+
+<head></head>
+
+<p>Tech Nurse</p>
+
+<body>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    Nome Completo: <input id="nome" required><br>
+    Email: <input id="email" required ><br>
+    Senha: <input id="senha" required type="password"><br>
+    Confirmar Senha: <input id="csenha" type="password" required><br>
+    <button id="confima" onclick="validarSenha()">Cadastrar</button>
+    <script>
+        nome = document.getElementById('nome').value
+        em = document.getElementById('email').value
+
+        function register() {
+            axios({
+                method: 'post',
+                url: 'http://localhost:3333/api/auth/register',
+                data: {
+                    "email": document.getElementById('email').value,
+                    "password": document.getElementById('senha').value
+                }
+            })
+                .then(data => {
+                    console.log(data)
+                    window.location.href = 'http://localhost:3333/login'
+                })
+                .catch(erro => {
+                    console.log(erro)
+                })
+            
+
+        }
+
+        function validarSenha() {
+            senha = document.getElementById('senha').value
+            senha2 = document.getElementById('csenha').value
+            if (senha != senha2) { //se a senha bate com a confirmação
+                alert('Senhas não batem!')
+            } else {
+                if (senha.length < 6) { // se a senha é menor que 6 caracteres
+                    alert('Senha muito curta!')
+                } else {
+                    a = senha.toLowerCase()
+                    if (a === senha) {
+                        alert('A senha necessita de ao menos uma letra minuscula!')
+                    } else {
+                        register()
+                        
+                    }
+                }
+            }
+        }
+
+
+
+    </script>
+</body>
+
+</html>
