@@ -1,54 +1,20 @@
-# Technurse API application
-REST API developed the consume recipients to feed their applications for aptitude tests.
+Aplicação desenvolvida por : Carlos Eduardo Tapudima de Oliveira
 
-The application has the following packages:.
+Banco de dados utilizado: MySQL
 
-1. Bodyparser
-2. Authentication JWT
-3. CORS
-4. Lucid ORM
-5. Migrations and seeds
+Framework MVC utilizado: Adonis JS
 
-### Install packages from yarn or npm
+Caminhos configurados para as telas:
 
-```js
-yarn install
-```
+## Cadastro:
+    http://localhost:3333/registro
 
-or
+## Login:
+    http://localhost:3333/login
 
-```js
-npm install
-```
+## Tela de usuário comum:
+    http://localhost:3333/home
 
-### Migrations
+## Tela de usuário administrador:
 
-Copy .env.example to .env 
-
-```js
-cp .env.example .env
-```
-
-Edit .env with settings from your database and choose mysql for connection type
-
-Run the following command to run startup migrations.
-
-```js
-node ace migration:run --force
-node ace seed --force
-```
-
-## Start server
-
-```js
-node server.js
-```
-
-## Routes configured into API
-```js
-/api/auth/login
-/api/auth/register
-/api/auth/nurses
-/api/auth/nurses/:id
-/api/auth/user
-```
+    http://localhost:3333/adm
