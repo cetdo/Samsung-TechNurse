@@ -4,8 +4,6 @@ Banco de dados utilizado: MySQL
 
 Framework MVC utilizado: Adonis JS
 
-Caminhos configurados para as telas:
-
 ## Cadastro:
     http://localhost:3333/registro
 
