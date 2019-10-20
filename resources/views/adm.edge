@@ -2,10 +2,80 @@
 <title>Administrador | Tech Nurse</title>
 
 <body onload="estaLogado()">
-    <h1 id="texto"></h1>
-    <h2 id="email"></h2>
+    <div id="container">
+        <p href="https://imgur.com/3XVWGla"><img src="https://i.imgur.com/3XVWGla.png" title="source: imgur.com"
+                style="width:110px;height:30px;" /></p>
+        <label id="texto" class="bemvindo"></label>
+        <label id="email"></label>
+        <button id="sair" class="button" onclick="sair()">Log Off</button>
+        <div id="lower">
 
-    <button id="sair" onclick="sair()">Clique aqui para sair</button>
+            <head>
+                <style type="text/css">
+                    body {
+                        width: 100%;
+                        height: 100%;
+                        font-family: 'Open Sans', sans-serif;
+                        color: #444;
+                        -webkit-font-smoothing: antialiased;
+                        background: #f0f0f0;
+                    }
+
+
+                    #container {
+                        position: fixed;
+                        width: 340px;
+                        height: 250px;
+                        top: 25%;
+                        left: 50%;
+                        margin-top: -140px;
+                        margin-left: -170px;
+                        background: #fff;
+                        border-radius: 3px;
+                        border: 1px solid #ccc;
+                        box-shadow: 5px 10px 8px #888888;
+                    }
+
+                    label {
+                        color: #555;
+                        margin-left: 20%;
+                        font-size: 18px;
+                    }
+
+                    .bemvindo {
+                        color: #555;
+                        display: inline-block;
+                        margin-left: 12;
+                        padding-top: 10px;
+                        font-size: 16px;
+                    }
+
+                    .button {
+                        float: right;
+                        position: relative;
+                        margin-right: 20px;
+                        margin-top: 50px;
+                        width: 300px;
+                        height: 30px;
+                        background-color: #6CF3C1;
+                        border: 1px solid #6CF3C1;
+                        box-shadow: 0 1px 2px rgba(0, 0, 0, .3), inset 0 1px 0 rgba(255, 255, 255, .5);
+                        cursor: pointer;
+                        -webkit-transition-duration: 0.4s;
+                        transition-duration: 0.4s;
+                        cursor: pointer;
+                        font-size: 16px;
+
+                    }
+
+                    p {
+                        text-align: center;
+                        color: #555
+                    }
+                </style>
+            </head>
+        </div>
+    </div>
 </body>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
@@ -13,21 +83,17 @@
     em = document.getElementById("email")
     function mostrarEmail() {
         tk = localStorage.getItem("ultimo")
-        console.log(tk)
         axios.get('http://localhost:3333/api/auth/user', {
             headers: {
                 'Authorization': 'Bearer ' + tk
             }
         })
             .then(data => {
-                console.log(data)
-
                 adm.innerHTML = 'Bem vindo a pagina de administrador!'
                 em.innerHTML = data.data.email
             })
             .catch(erro => {
-                console.log(erro)
-                alert('Erro! O usuário não está logado!')
+                alert('Erro ao conectar com o banco de dados!')
             })
     }
 

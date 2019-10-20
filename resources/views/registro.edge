@@ -128,11 +128,11 @@
                 }
             })
                 .then(data => {
-                    console.log(data)
+                    alert('Cadastro realizado com suecesso!')
                     window.location.href = 'http://localhost:3333/login'
                 })
                 .catch(erro => {
-                    console.log(erro)
+                    alert("Erro ao tentar cadastar usuario no banco de dados!")
                 })
 
 

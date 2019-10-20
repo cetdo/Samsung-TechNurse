@@ -126,12 +126,10 @@
                     alert('Login efetuado com sucesso!')
                     tk = data.data.token
                     localStorage.setItem('ultimo', tk)
-                    console.log(data)
                     window.location.href = "http://localhost:3333/home"
                 })
                 .catch(erro => {
                     alert('Erro ao efetuar login!')
-                    console.log(erro)
                 })
 
 
