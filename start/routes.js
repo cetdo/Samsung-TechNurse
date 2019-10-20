@@ -30,10 +30,14 @@ Route.on("/registro").render("registro");
 
 Route.on("/login").render("login");
 
+Route.on("/home").render("home")
+
+Route.on("/adm").render("adm")
+
 Route.post("/api/auth/login", "AuthController.login");
 Route.post("/api/auth/register", "AuthController.store");
 
 Route.get("/api/nurses", "NurseController.index").middleware("auth");
 Route.get("/api/nurses/:id", "NurseController.show").middleware("auth");
 
-Route.get("/api/user", "AuthController.profile").middleware("auth");
+Route.get("/api/auth/user", "AuthController.profile").middleware("auth");

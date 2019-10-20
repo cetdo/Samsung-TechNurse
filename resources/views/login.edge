@@ -1,11 +1,11 @@
-<html>
-<title>Tech Nurse | Login</title>
+<html >
+<title >Tech Nurse | Login</title>
 
 
-<head></head>
+<head ></head>
 <p>Tech Nurse</p>
 
-<body>
+<body onload="checarToken()">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     Email: <input id="email"><br>
@@ -28,16 +28,24 @@
             })
                 .then(data => {
                     alert('Login efetuado com sucesso!')
+                    tk = data.data.token
+                    localStorage.setItem('ultimo', tk)
                     console.log(data)
+                    window.location.href = "http://localhost:3333/home"
                 })
                 .catch(erro => {
                     alert('Erro ao efetuar login!')
                     console.log(erro)
                 })
 
-            
+
         }
 
+        function checarToken() {
+            if (localStorage.getItem("ultimo") !== null) {
+                window.location.href = "http://localhost:3333/adm"
+            }
+        }
 
 
     </script>

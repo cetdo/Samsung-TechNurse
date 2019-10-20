@@ -16,6 +16,14 @@ class AuthController {
     return view.render('login');
   }
 
+  async home({view}){
+    return view.render('home');
+  }
+
+  async adm({view}){
+    return view.render('adm');
+  }
+
   async login({ request, auth }) {
     const { email, password } = request.all();
     const token = await auth.attempt(email, password);

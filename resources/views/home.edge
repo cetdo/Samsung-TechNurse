@@ -1,3 +1,46 @@
 <html>
-    
+<title>Home | Tech Nurse</title>
+
+<head></head>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<body onload="estaLogado()">
+    <h1 id="email">Email: </h1>
+    <button id="voltar" onclick="voltar()">
+        Voltar</button>
+</body>
+<script>
+    function mostrarEmail() {
+        tk = localStorage.getItem('ultimo')
+        //console.log(tk)
+        axios.get('http://localhost:3333/api/auth/user', {
+            headers: {
+                'Authorization': 'Bearer ' + tk
+            }
+        })
+            .then(data => {
+                //console.log(data)
+                em = document.getElementById("email")
+                em.innerHTML += data.data.email
+            })
+            .catch(erro => {
+                //console.log(erro)
+                alert('Erro! O usuário não está logado!')
+            })
+    }
+
+    function voltar() {
+        window.location.href = "http://localhost:3333/login"
+    }
+
+    function estaLogado() {
+        if (localStorage.getItem("ultimo") !== null) {
+            mostrarEmail()
+        }else{
+            em = document.getElementById('email')
+            em.innerHTML = "ERRO: Usuário não está logado!"
+        }
+    }
+</script>
+
 </html>
