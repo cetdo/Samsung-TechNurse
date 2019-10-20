@@ -1,9 +1,7 @@
 <html>
 <title>Home | Tech Nurse</title>
 
-<head>
-    
-</head>
+<head></head>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 <body onload="estaLogado()">
@@ -41,6 +39,8 @@
         }else{
             em = document.getElementById('email')
             em.innerHTML = "ERRO: Usuário não está logado!"
+            alert('Usuário não está logado! Redirecionando para Página de Login')
+            window.location.href = "http://localhost:3333/login"
         }
     }
 </script>

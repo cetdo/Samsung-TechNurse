@@ -1,16 +1,52 @@
 <html>
 <title>Administrador | Tech Nurse</title>
 
-<body>
-    <h1> ESTA É A PAGINA DO ADM !!!</h1>
+<body onload="estaLogado()">
+    <h1 id="texto"></h1>
+    <h2 id="email"></h2>
 
     <button id="sair" onclick="sair()">Clique aqui para sair</button>
 </body>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
-    function sair(){
+    adm = document.getElementById("texto")
+    em = document.getElementById("email")
+    function mostrarEmail() {
+        tk = localStorage.getItem("ultimo")
+        console.log(tk)
+        axios.get('http://localhost:3333/api/auth/user', {
+            headers: {
+                'Authorization': 'Bearer ' + tk
+            }
+        })
+            .then(data => {
+                console.log(data)
+
+                adm.innerHTML = 'Bem vindo a pagina de administrador!'
+                em.innerHTML = data.data.email
+            })
+            .catch(erro => {
+                console.log(erro)
+                alert('Erro! O usuário não está logado!')
+            })
+    }
+
+    function sair() {
         localStorage.clear()
         window.location.href = "http://localhost:3333/login"
     }
+
+    function estaLogado() {
+        if (localStorage.getItem("ultimo") !== null) {
+            mostrarEmail()
+        } else {
+            adm.innerHTML = 'ERRO: USUÁRIO NÃO ESTÁ LOGADO!'
+            alert('Usuário não está logado! Redirecionando para Página de Login.')
+            window.location.href = "http://localhost:3333/login"
+        }
+    }
+
+
 </script>
 
 </html>
